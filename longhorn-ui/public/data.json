@@ -1,0 +1,218 @@
+[
+  {
+    "name": "Test Case 1",
+    "students": [
+      {
+        "name": "Alice",
+        "age": 20,
+        "gender": "Female",
+        "year": 2,
+        "major": "Computer Science",
+        "gpa": 3.5,
+        "roommate": "Bob",
+        "roommatePreferences": ["Bob", "Charlie", "Frank"],
+        "previousInternships": ["Google"],
+        "friends": ["Bob"],
+        "chatHistory": ["Alice -> Bob: Hello there!", "Bob -> Alice: Hi back!"]
+      },
+      {
+        "name": "Bob",
+        "age": 21,
+        "gender": "Male",
+        "year": 3,
+        "major": "Computer Science",
+        "gpa": 3.7,
+        "roommate": "Alice",
+        "roommatePreferences": ["Alice", "Charlie", "Frank"],
+        "previousInternships": ["Google", "Microsoft"],
+        "friends": ["Alice"],
+        "chatHistory": ["Bob -> Alice: Hi back!", "Alice -> Bob: Hello there!"]
+      },
+      {
+        "name": "Charlie",
+        "age": 20,
+        "gender": "Male",
+        "year": 2,
+        "major": "Mathematics",
+        "gpa": 3.2,
+        "roommate": "Frank",
+        "roommatePreferences": ["Alice", "Bob", "Frank"],
+        "previousInternships": ["None"],
+        "friends": [],
+        "chatHistory": []
+      },
+      {
+        "name": "Frank",
+        "age": 23,
+        "gender": "Male",
+        "year": 3,
+        "major": "Chemistry",
+        "gpa": 3.1,
+        "roommate": "Charlie",
+        "roommatePreferences": ["Alice", "Bob", "Charlie"],
+        "previousInternships": [],
+        "friends": [],
+        "chatHistory": []
+      },
+      {
+        "name": "Dana",
+        "age": 22,
+        "gender": "Female",
+        "year": 4,
+        "major": "Biology",
+        "gpa": 3.8,
+        "roommate": "Evan",
+        "roommatePreferences": ["Evan"],
+        "previousInternships": ["Pfizer"],
+        "friends": [],
+        "chatHistory": []
+      },
+      {
+        "name": "Evan",
+        "age": 22,
+        "gender": "Male",
+        "year": 4,
+        "major": "Biology",
+        "gpa": 3.6,
+        "roommate": "Dana",
+        "roommatePreferences": ["Dana"],
+        "previousInternships": ["Moderna", "Pfizer"],
+        "friends": [],
+        "chatHistory": []
+      }
+    ],
+    "edges": [
+      {"source": "Alice", "target": "Bob", "weight": 9},
+      {"source": "Alice", "target": "Charlie", "weight": 1},
+      {"source": "Charlie", "target": "Frank", "weight": 4},
+      {"source": "Dana", "target": "Evan", "weight": 10}
+    ],
+    "pods": [
+      ["Alice", "Bob", "Charlie", "Frank"],
+      ["Dana", "Evan"]
+    ],
+    "referralPaths": [
+      {"from": "Alice", "company": "Microsoft", "path": ["Alice", "Bob"]},
+      {"from": "Charlie", "company": "Google", "path": ["Charlie", "Alice"]},
+      {"from": "Charlie", "company": "Microsoft", "path": ["Charlie", "Alice", "Bob"]},
+      {"from": "Frank", "company": "Google", "path": ["Frank", "Charlie", "Alice"]},
+      {"from": "Frank", "company": "Microsoft", "path": ["Frank", "Charlie", "Alice", "Bob"]},
+      {"from": "Dana", "company": "Moderna", "path": ["Dana", "Evan"]}
+    ]
+  },
+  {
+    "name": "Test Case 2",
+    "students": [
+      {
+        "name": "Greg",
+        "age": 24,
+        "gender": "Male",
+        "year": 4,
+        "major": "Economics",
+        "gpa": 3.4,
+        "roommate": "Helen",
+        "roommatePreferences": ["Helen", "Ivy"],
+        "previousInternships": ["InternshipA"],
+        "friends": ["Helen"],
+        "chatHistory": ["Greg -> Helen: Hello there!", "Helen -> Greg: Hi back!"]
+      },
+      {
+        "name": "Helen",
+        "age": 24,
+        "gender": "Female",
+        "year": 4,
+        "major": "Economics",
+        "gpa": 3.5,
+        "roommate": "Greg",
+        "roommatePreferences": ["Greg", "Ivy"],
+        "previousInternships": ["InternshipB"],
+        "friends": ["Greg"],
+        "chatHistory": ["Greg -> Helen: Hello there!", "Helen -> Greg: Hi back!"]
+      },
+      {
+        "name": "Ivy",
+        "age": 25,
+        "gender": "Female",
+        "year": 4,
+        "major": "Economics",
+        "gpa": 3.8,
+        "roommate": null,
+        "roommatePreferences": ["Helen", "Greg"],
+        "previousInternships": ["DummyCompany"],
+        "friends": [],
+        "chatHistory": []
+      }
+    ],
+    "edges": [
+      {"source": "Greg", "target": "Helen", "weight": 7},
+      {"source": "Greg", "target": "Ivy", "weight": 2},
+      {"source": "Helen", "target": "Ivy", "weight": 2}
+    ],
+    "pods": [
+      ["Greg", "Helen", "Ivy"]
+    ],
+    "referralPaths": [
+      {"from": "Greg", "company": "InternshipB", "path": ["Greg", "Helen"]},
+      {"from": "Greg", "company": "DummyCompany", "path": ["Greg", "Ivy"]},
+      {"from": "Helen", "company": "InternshipA", "path": ["Helen", "Greg"]},
+      {"from": "Helen", "company": "DummyCompany", "path": ["Helen", "Ivy"]},
+      {"from": "Ivy", "company": "InternshipA", "path": ["Ivy", "Greg"]},
+      {"from": "Ivy", "company": "InternshipB", "path": ["Ivy", "Helen"]}
+    ]
+  },
+  {
+    "name": "Test Case 3",
+    "students": [
+      {
+        "name": "Jack",
+        "age": 19,
+        "gender": "Male",
+        "year": 1,
+        "major": "History",
+        "gpa": 3.0,
+        "roommate": "Kim",
+        "roommatePreferences": ["Kim"],
+        "previousInternships": ["MuseumIntern"],
+        "friends": ["Kim"],
+        "chatHistory": ["Jack -> Kim: Hello there!", "Kim -> Jack: Hi back!"]
+      },
+      {
+        "name": "Kim",
+        "age": 19,
+        "gender": "Female",
+        "year": 1,
+        "major": "History",
+        "gpa": 3.2,
+        "roommate": "Jack",
+        "roommatePreferences": ["Jack"],
+        "previousInternships": ["MuseumIntern"],
+        "friends": ["Jack"],
+        "chatHistory": ["Jack -> Kim: Hello there!", "Kim -> Jack: Hi back!"]
+      },
+      {
+        "name": "Leo",
+        "age": 20,
+        "gender": "Male",
+        "year": 1,
+        "major": "History",
+        "gpa": 3.5,
+        "roommate": null,
+        "roommatePreferences": [],
+        "previousInternships": ["None"],
+        "friends": [],
+        "chatHistory": []
+      }
+    ],
+    "edges": [
+      {"source": "Jack", "target": "Kim", "weight": 10},
+      {"source": "Jack", "target": "Leo", "weight": 2},
+      {"source": "Kim", "target": "Leo", "weight": 2}
+    ],
+    "pods": [
+      ["Jack", "Kim", "Leo"]
+    ],
+    "referralPaths": [
+      {"from": "Leo", "company": "MuseumIntern", "path": ["Leo", "Jack"]}
+    ]
+  }
+]

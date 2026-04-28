@@ -5,9 +5,7 @@ import java.util.*;
  * 
  * Finds the shortest path from a starting node (student) to any student
  * who has interned at a target company.
- * Edge weights inverted (10 - weight, so far shouldnt go over. Will break if
- * (-))
- * Bcs lower number is shorter path.
+ * Edge weights inverted (10 - weight) Bcs lower number is shorter path.
  */
 public class ReferralPathFinder {
 

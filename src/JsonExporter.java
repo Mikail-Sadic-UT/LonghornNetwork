@@ -9,6 +9,8 @@ import java.util.concurrent.*;
  *
  * Usage: java JsonExporter [outputPath]
  * defaults to longhorn-ui/public/data.json
+ * 
+ * Got help from AI to make this one work correctly
  */
 public class JsonExporter {
 
@@ -28,8 +30,8 @@ public class JsonExporter {
             List<UniversityStudent> students = testCases.get(i);
 
             // Run all the algorithms in order
-            GaleShapley.assignRoommates(students); // Roommates first
-            StudentGraph graph = new StudentGraph(students); // Graph after (incl +4 bonus)
+            GaleShapley.assignRoommates(students);               // Roommates first
+            StudentGraph graph = new StudentGraph(students);     // Graph after (incl +4 bonus)
             PodFormation podFormation = new PodFormation(graph); // Pods from graph
             podFormation.formPods(4);
 
@@ -108,7 +110,7 @@ public class JsonExporter {
             }
             json.append("    ],\n");
 
-            // Referral paths — run from each student to each unique company they don't have
+            // Referral paths - run from each student to each unique company they don't have
             json.append("    \"referralPaths\": [\n");
             Set<String> allCompanies = new LinkedHashSet<>();
             for (UniversityStudent s : students) {
@@ -169,8 +171,7 @@ public class JsonExporter {
         System.out.println("Exported data to " + outFile.getAbsolutePath());
     }
 
-    // Find a company that the START student does NOT have, so there's an actual
-    // path
+    // Find a company that the START student does NOT have, so there's an actual path
     private static String findTargetCompany(List<UniversityStudent> students) {
         if (students.isEmpty())
             return null;
@@ -182,8 +183,7 @@ public class JsonExporter {
                     return internship;
             }
         }
-        // Fallback: if everyone shares the same internships, just pick the first real
-        // one
+        // Fallback: if everyone shares the same internships, just pick the first real one
         for (UniversityStudent s : students) {
             for (String internship : s.previousInternships) {
                 if (!internship.equalsIgnoreCase("None"))

@@ -29,7 +29,7 @@ function App() {
       <div className="topbar">
         <header className="header">
           <h1>Longhorn Network</h1>
-          <p className="subtitle">ECE 422C Lab 6 — Student Social Network Visualizer</p>
+          <p className="subtitle">ECE 422C Lab 6</p>
         </header>
 
         <nav className="tabs">

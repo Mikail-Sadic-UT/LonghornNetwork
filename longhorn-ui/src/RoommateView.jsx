@@ -22,7 +22,7 @@ export default function RoommateView({ students }) {
             {pairs.map((p, i) => (
                 <div key={i} className="roommate-card paired">
                     <span className="rm-name">{p.a}</span>
-                    <span className="rm-icon">+</span>
+                    <span className="rm-name">&</span>
                     <span className="rm-name">{p.b}</span>
                 </div>
             ))}

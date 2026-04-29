@@ -1,4 +1,4 @@
-// Shows each student's friend list and chat history
+// Per-student cards showing friends and chat messages
 export default function SocialView({ students }) {
     return (
         <div className="social-grid">

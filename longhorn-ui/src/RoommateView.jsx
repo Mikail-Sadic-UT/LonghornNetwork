@@ -1,10 +1,10 @@
-// Shows roommate pairs as cards. Unpaired students shown separately.
+// Roommate pairs as cards, unpaired students shown separately
 export default function RoommateView({ students }) {
-    // Build pairs (deduplicated) and collect unpaired
     const seen = new Set()
     const pairs = []
     const unpaired = []
 
+    // Deduplicate pairs (A+B and B+A are the same pair)
     students.forEach(s => {
         if (seen.has(s.name)) return
         if (s.roommate) {

@@ -1,14 +1,15 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
 
-// Lays out nodes in a circle on a canvas.
-// Uses devicePixelRatio for crisp rendering on HiDPI screens.
+// Draws the student connection graph on a canvas
+// Nodes in a circle, weighted edges between them, hover to highlight
 export default function GraphView({ students, edges }) {
     const canvasRef = useRef(null)
-    const [hovered, setHovered] = useState(null)
+    const [hovered, setHovered] = useState(null)  // which node is being hovered
     const nodeRadius = 28
     const padding = 60
-    const displaySize = 540 // CSS pixels (square)
+    const displaySize = 540
 
+    // Calculate x,y for each student in a circle layout
     const getPositions = useCallback((size) => {
         const cx = size / 2
         const cy = size / 2
@@ -24,13 +25,14 @@ export default function GraphView({ students, edges }) {
         return positions
     }, [students])
 
+    // Redraw whenever data or hover changes
     useEffect(() => {
         const canvas = canvasRef.current
         if (!canvas) return
         const ctx = canvas.getContext('2d')
         const dpr = window.devicePixelRatio || 1
 
-        // Set actual pixel buffer to dpr × display size for sharpness
+        // Scale up the pixel buffer for sharp rendering on hidpi
         canvas.width = displaySize * dpr
         canvas.height = displaySize * dpr
         ctx.scale(dpr, dpr)
@@ -38,7 +40,7 @@ export default function GraphView({ students, edges }) {
         const pos = getPositions(displaySize)
         ctx.clearRect(0, 0, displaySize, displaySize)
 
-        // Edges
+        // Draw edges first (so nodes sit on top)
         edges.forEach(e => {
             const from = pos[e.source]
             const to = pos[e.target]
@@ -46,6 +48,7 @@ export default function GraphView({ students, edges }) {
 
             const isHl = hovered && (e.source === hovered || e.target === hovered)
 
+            // Line
             ctx.beginPath()
             ctx.moveTo(from.x, from.y)
             ctx.lineTo(to.x, to.y)
@@ -53,6 +56,7 @@ export default function GraphView({ students, edges }) {
             ctx.lineWidth = isHl ? 2.5 : 1.5
             ctx.stroke()
 
+            // Weight label at midpoint
             const mx = (from.x + to.x) / 2
             const my = (from.y + to.y) / 2
             const text = String(e.weight)
@@ -60,13 +64,13 @@ export default function GraphView({ students, edges }) {
             ctx.textAlign = 'center'
             ctx.textBaseline = 'middle'
             const tw = ctx.measureText(text).width + 8
-            ctx.fillStyle = '#111128'
+            ctx.fillStyle = '#111128'                     // bg pill
             ctx.fillRect(mx - tw / 2, my - 9, tw, 18)
-            ctx.fillStyle = isHl ? '#ff8c3a' : '#888'
+            ctx.fillStyle = isHl ? '#ff8c3a' : '#888'    // text color
             ctx.fillText(text, mx, my)
         })
 
-        // Nodes
+        // Draw nodes
         students.forEach(s => {
             const p = pos[s.name]
             const isHov = s.name === hovered
@@ -79,6 +83,7 @@ export default function GraphView({ students, edges }) {
             ctx.lineWidth = 2
             ctx.stroke()
 
+            // Name inside the circle
             ctx.fillStyle = '#fff'
             ctx.font = 'bold 13px sans-serif'
             ctx.textAlign = 'center'
@@ -87,10 +92,11 @@ export default function GraphView({ students, edges }) {
         })
     }, [students, edges, hovered, getPositions])
 
+    // Check if mouse is over a node
     const handleMouseMove = (e) => {
         const canvas = canvasRef.current
         const rect = canvas.getBoundingClientRect()
-        // Map mouse position to our logical coordinate space
+        // Convert screen coords to canvas coords
         const mx = (e.clientX - rect.left) * (displaySize / rect.width)
         const my = (e.clientY - rect.top) * (displaySize / rect.height)
         const pos = getPositions(displaySize)

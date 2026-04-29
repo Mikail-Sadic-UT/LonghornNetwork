@@ -1,4 +1,4 @@
-// Shows pod groupings as small labeled groups
+// Pod groupings from Prim's algorithm
 export default function PodView({ pods }) {
     if (!pods || pods.length === 0) {
         return <p className="muted">No pods formed.</p>

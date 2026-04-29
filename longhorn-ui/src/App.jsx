@@ -6,10 +6,12 @@ import PodView from './PodView'
 import SocialView from './SocialView'
 import './App.css'
 
+// Main app — loads JSON, tracks active test case, renders everything
 function App() {
-  const [data, setData] = useState(null)
-  const [activeCase, setActiveCase] = useState(0)
+  const [data, setData] = useState(null)           // all test cases
+  const [activeCase, setActiveCase] = useState(0)   // which tab is selected
 
+  // Grab data.json once on load
   useEffect(() => {
     fetch('/data.json')
       .then(res => res.json())
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <div className="app">
+      {/* Header left, test case tabs right */}
       <div className="topbar">
         <header className="header">
           <h1>Longhorn Network</h1>
@@ -42,7 +45,7 @@ function App() {
         </nav>
       </div>
 
-      {/* Student table — full width */}
+      {/* Student data table */}
       <section className="section">
         <h2>Students ({testCase.students.length})</h2>
         <div className="table-wrap">
@@ -79,9 +82,8 @@ function App() {
         </div>
       </section>
 
-      {/* Three-column: Left sidebar | Graph center | Right sidebar */}
+      {/* 3-col layout: sidebar | graph | sidebar */}
       <div className="three-col">
-        {/* Left: roommates + pods + referral */}
         <div className="sidebar">
           <section className="section">
             <h2>Roommates</h2>
@@ -97,7 +99,6 @@ function App() {
           </section>
         </div>
 
-        {/* Center: graph */}
         <section className="section col-graph">
           <h2>Connection Graph</h2>
           <div className="graph-container">
@@ -105,7 +106,6 @@ function App() {
           </div>
         </section>
 
-        {/* Right: friends & chat */}
         <div className="sidebar">
           <section className="section">
             <h2>Friends & Chat</h2>

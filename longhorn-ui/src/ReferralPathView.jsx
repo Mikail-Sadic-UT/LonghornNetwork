@@ -1,4 +1,4 @@
-// Shows multiple referral path queries
+// Displays all referral path queries for this test case
 export default function ReferralPathView({ referralPaths }) {
     if (!referralPaths || referralPaths.length === 0) {
         return <p className="muted">No referral paths found.</p>
@@ -8,9 +8,7 @@ export default function ReferralPathView({ referralPaths }) {
         <div className="referral-list">
             {referralPaths.map((rp, i) => (
                 <div key={i} className="referral-entry">
-                    <p className="referral-label">
-                        {rp.from} to {rp.company}
-                    </p>
+                    <p className="referral-label">{rp.from} to {rp.company}</p>
                     {rp.path.length === 0 ? (
                         <p className="muted">No path found</p>
                     ) : (
